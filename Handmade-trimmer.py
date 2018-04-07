@@ -21,7 +21,7 @@ for read in cropped_reads:
             trimmed_reads.append(read[0:i])
             break
 with open ('trimmed.fastq','w') as output:
-    count = SeqIO.write(records, output, "fastq")
+    count = SeqIO.write(trimmed_reads, output, "fastq")
     print ("Trimmed {} FASTQ records".format(count))
     print ("Threshold value was set as {}".format(args.THRES))
     if args.HEAD !=0 or args.TAIL != 0:
