@@ -9,7 +9,9 @@ Also has arguments for deleting nucleotides from beggining and end of the read w
 ###### =======HELP=======
 ###### Arguments
 ```
-Handmade-trimmer.py [i] [o] [HEAD] [TAIL] [WINDOW] [THRES]
+Handmade-trimmer.py [-h] [--HEAD HEAD] [--TAIL TAIL] [--WINDOW WINDOW]  
+                           [--THRES THRES]  
+                           —i —o  
 -i Input filename (fastq format only)  
 -o Output filename  
 --HEAD Headcrop: number of nucleotides to be cropped from the begginig of read  
