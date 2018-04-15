@@ -3,7 +3,7 @@ Test for handmade trimmer script
 
 ##### Handmade trimmer 1.0
 
-Analyses phred quality in each read in fastq file with sliding window and crops the end of read, if quality drops below threshold
+Analyses phred quality in each read in fastq file with sliding window and crops the end of read, if quality drops below threshold  
 Also has arguments for deleting nucleotides from beggining and end of the read without any quality check
 
 ###### =======HELP=======
