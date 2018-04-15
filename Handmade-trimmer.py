@@ -1,17 +1,17 @@
 import argparse
-import Bio
 from Bio import SeqIO
 
 parser = argparse.ArgumentParser()
-parser.add_argument('—i', help='input filename')
-parser.add_argument('—o', help='output filename')
-parser.add_argument('--HEAD', default = 0, help='Headcrop: number of nucleotides to be cropped from the begginig of read')
-parser.add_argument('--TAIL', default = 0, help='Tailcrop: number of nucleotides to be cropped from the end of read')
+parser.add_argument('-i', help='input filename')
+parser.add_argument('-o', help='output filename')
+parser.add_argument('--HEAD', type=int, default = 0, help='Headcrop: number of nucleotides to be cropped from the begginig of read')
+parser.add_argument('--TAIL', type=int, default = 0, help='Tailcrop: number of nucleotides to be cropped from the end of read')
 parser.add_argument('--WINDOW', type=int, default=4, help='Sliding window size. Default value = 4')
 parser.add_argument('--THRES', type=int, default=30, help='Threshold, if window average drops below it, nucleotides will be cropped. Default value = 30')
-args = parser.parse_args(args=[])
+args = parser.parse_args()
 
-cropped_reads = [rec[args.HEAD:len(rec.seq)-args.TAIL] for rec in SeqIO.parse(open(args.i), "fastq")]
+with open (args.i,'r') as file:
+    cropped_reads = [rec[args.HEAD:len(rec.seq)-args.TAIL] for rec in SeqIO.parse(file, "fastq")]
 trimmed_reads = []
 for read in cropped_reads:
     quality = read.letter_annotations['phred_quality']
@@ -25,4 +25,4 @@ with open (args.o,'w') as output:
     print ("Trimmed {} FASTQ records".format(count))
     print ("Threshold value was set as {}".format(args.THRES))
     if args.HEAD !=0 or args.TAIL != 0:
-        print("{} nucleotides was cropped from the beggining and {} at the end of each read")
+        print("{} nucleotides was cropped from the beggining and {} at the end of each read".format(args.HEAD,args.TAIL))
